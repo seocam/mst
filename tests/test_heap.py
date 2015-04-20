@@ -89,3 +89,20 @@ class TestHeap(unittest.TestCase):
 
         self.assertEqual(self.heap.next(), (3, 3))
         self.assertEqual(self.heap.root, (5, 5))
+
+    def test_index(self):
+        self.heap.add(value=10, priority=10)
+        self.assertEqual(self.heap.index(10), 0)
+
+        self.heap.add(value=20, priority=20)
+        self.assertEqual(self.heap.index(20), 1)
+
+        self.heap.add(value=5, priority=5)
+        self.assertEqual(self.heap.index(5), 0)
+
+        self.heap.add(value=7, priority=7)
+        self.heap.add(value=3, priority=3)
+
+        heap = [(3, 3), (5, 5), (10, 10), (20, 20), (7, 7)]
+        for (i, (p, value)) in enumerate(self.heap._heap):
+            self.assertEqual(self.heap.index(value), i)

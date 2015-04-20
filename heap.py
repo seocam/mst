@@ -26,12 +26,19 @@ class MinHeap(object):
         # Swapping in Pythonic way
         self._heap[i], self._heap[j] = self._heap[j], self._heap[i]
 
+        value_i = self._heap[i][1]
+        self._heap_index[value_i] = i
+
+        value_j = self._heap[j][1]
+        self._heap_index[value_j] = j
+
     def next(self):
         if not self._heap:
             raise StopIteration
             
         self.swap(0, self.last_index)
         popped = self._heap.pop(self.last_index)
+        del self._heap_index[popped[1]]
 
         if self._heap:
             self.bubble_down()
@@ -40,7 +47,11 @@ class MinHeap(object):
 
     def add(self, value, priority):
         self._heap.append((priority, value))
+        self._heap_index[value] = self.last_index
         self.bubble_up()
+
+    def index(self, value):
+        return self._heap_index[value]
 
     def bubble_up(self, current_index=None):
         if current_index == None:
