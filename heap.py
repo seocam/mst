@@ -35,7 +35,7 @@ class MinHeap(object):
     def next(self):
         if not self._heap:
             raise StopIteration
-            
+
         self.swap(0, self.last_index)
         popped = self._heap.pop(self.last_index)
         del self._heap_index[popped[1]]
@@ -54,7 +54,7 @@ class MinHeap(object):
         return self._heap_index[value]
 
     def bubble_up(self, current_index=None):
-        if current_index == None:
+        if current_index is None:
             current_index = self.last_index
 
         current = self._heap[current_index]
@@ -67,7 +67,7 @@ class MinHeap(object):
             parent_index, parent = self._get_parent(current_index)
 
     def bubble_down(self, current_index=None):
-        if current_index == None:
+        if current_index is None:
             current_index = 0
 
         current = self._heap[current_index]
@@ -88,12 +88,12 @@ class MinHeap(object):
         else:
             parent_index = index // 2
 
-        return parent_index 
+        return parent_index
 
     def _get_parent(self, index):
         parent_index = self._get_parent_index(index)
 
-        if parent_index == None:
+        if parent_index is None:
             return None, None
 
         return parent_index, self._heap[parent_index]
@@ -123,9 +123,9 @@ class MinHeap(object):
 
         return (left, left_child), (right, right_child)
 
-    def _get_lowest_priority_child(self, index): 
+    def _get_lowest_priority_child(self, index):
         children = self._get_children(index)
-        (left_index, left_child), (right_index, right_child) = children 
+        (left_index, left_child), (right_index, right_child) = children
 
         if not any((left_child, right_child)):
             return None, None
