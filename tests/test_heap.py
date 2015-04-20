@@ -85,7 +85,7 @@ class TestHeap(unittest.TestCase):
         self.heap.add(value=10, priority=10)
         self.heap.add(value=5, priority=5)
         self.heap.add(value=3, priority=3)
-        self.heap.add(value=15, priority=5)
+        self.heap.add(value=15, priority=15)
 
         self.assertEqual(self.heap.next(), (3, 3))
         self.assertEqual(self.heap.root, (5, 5))
@@ -106,3 +106,28 @@ class TestHeap(unittest.TestCase):
         heap = [(3, 3), (5, 5), (10, 10), (20, 20), (7, 7)]
         for (i, (p, value)) in enumerate(self.heap._heap):
             self.assertEqual(self.heap.index(value), i)
+
+    def test_decrease_priority(self):
+        self.heap.add(value=10, priority=10)
+        self.heap.add(value=5, priority=5)
+        self.heap.add(value=3, priority=3)
+        self.heap.add(value=15, priority=15)
+
+        self.heap.update(15, 1)
+        heap = [(1, 15), (3, 3), (5, 5), (10, 10)]
+        self.assertEqual(self.heap._heap, heap)
+
+    def test_increase_priority(self):
+        self.heap.add(value=10, priority=10)
+        self.heap.add(value=5, priority=5)
+        self.heap.add(value=3, priority=3)
+        self.heap.add(value=15, priority=15)
+
+        self.heap.update(3, 12)
+        heap = [(5, 5), (10, 10), (12, 3), (15, 15)]
+        self.assertEqual(self.heap._heap, heap)
+
+        self.heap.add(value=20, priority=20)
+        self.heap.update(5, 25)
+        heap = [(10, 10), (15, 15), (12, 3), (25, 5), (20, 20)]
+        self.assertEqual(self.heap._heap, heap)

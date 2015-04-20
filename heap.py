@@ -53,6 +53,16 @@ class MinHeap(object):
     def index(self, value):
         return self._heap_index[value]
 
+    def update(self, value, priority):
+        index = self.index(value)
+        current_priority = self._heap[index][0]
+        self._heap[index] = (priority, value)
+
+        if priority > current_priority:
+            self.bubble_down(index)
+        else:
+            self.bubble_up(index)
+
     def bubble_up(self, current_index=None):
         if current_index is None:
             current_index = self.last_index
