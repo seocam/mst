@@ -1,6 +1,9 @@
 
+
+all: install
+
 install:
-	echo
+	pip install nose coverage flake8
 
 test:
 	flake8 -v .
