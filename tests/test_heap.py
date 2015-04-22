@@ -1,7 +1,7 @@
 
 import unittest
 
-from heap import MinHeap
+from ..heap import MinHeap
 
 
 class TestHeap(unittest.TestCase):

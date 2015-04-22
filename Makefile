@@ -7,4 +7,4 @@ install:
 
 test:
 	flake8 -v .
-	nosetests --with-coverage
+	nosetests --with-coverage --cover-min-percentage=100
