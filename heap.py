@@ -1,4 +1,6 @@
 
+from __future__ import print_function
+
 try:
     from collections import MutableMapping
 except ImportError:
@@ -31,12 +33,12 @@ class MinHeap(MutableMapping):
         level = 0
         i = 0
         for node in self._heap:
-            print '{}'.format(node),
+            print('{}'.format(node), end='')
             i += 1
             if i >= 2 ** level:
                 level += 1
                 i = 0
-                print
+                print()
 
     def __iter__(self):
         return self
