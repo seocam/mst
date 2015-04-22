@@ -131,3 +131,24 @@ class TestHeap(unittest.TestCase):
         self.heap.update(5, 25)
         heap = [(10, 10), (15, 15), (12, 3), (25, 5), (20, 20)]
         self.assertEqual(self.heap._heap, heap)
+
+    def test_setitem(self):
+        self.heap[10] = 1
+        self.assertEqual(self.heap.root, (1, 10))
+        self.heap[20] = 2
+        self.assertEqual(self.heap.root, (1, 10))
+        self.heap[30] = 0
+        self.assertEqual(self.heap.root, (0, 30))
+
+    def test_getitem(self):
+        self.heap[10] = 1
+        self.assertEqual(self.heap[10], 1)
+        self.heap[10] = 2
+        self.assertEqual(self.heap[10], 2)
+
+        with self.assertRaises(KeyError):
+            self.heap[20]
+
+    def test_delitem(self):
+        with self.assertRaises(NotImplementedError):
+            del self.heap[10]

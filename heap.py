@@ -1,12 +1,39 @@
 
-class MinHeap(object):
+from collections import MutableMapping
+
+
+class MinHeap(MutableMapping):
 
     def __init__(self):
         self._heap = []
         self._heap_index = {}
 
+    def __setitem__(self, key, priority):
+        if key in self._heap_index:
+            self.update(key, priority)
+        else:
+            self.add(key, priority)
+
+    def __getitem__(self, key):
+        index = self._heap_index[key]
+        return self._heap[index][0]
+
+    def __delitem__(self, key):
+        raise NotImplementedError('Cannot delete arbitrary element from heap')
+
     def __len__(self):
         return len(self._heap)
+
+    def __str__(self):
+        level = 0
+        i = 0
+        for node in self._heap:
+            print '{}'.format(node),
+            i += 1
+            if i >= 2 ** level:
+                level += 1
+                i = 0
+                print
 
     def __iter__(self):
         return self
