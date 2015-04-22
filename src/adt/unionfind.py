@@ -2,7 +2,7 @@
 class UnionFind(list):
 
     def __init__(self, lenght):
-        self._component_id = range(lenght)
+        self._component_id = list(range(lenght))
         self._component_size = [1] * lenght
 
     def union(self, p, q):
