@@ -103,7 +103,6 @@ class TestHeap(unittest.TestCase):
         self.heap.add(value=7, priority=7)
         self.heap.add(value=3, priority=3)
 
-        heap = [(3, 3), (5, 5), (10, 10), (20, 20), (7, 7)]
         for (i, (p, value)) in enumerate(self.heap._heap):
             self.assertEqual(self.heap.index(value), i)
 
