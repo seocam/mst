@@ -1,7 +1,7 @@
 
 import unittest
 
-from ..adt.unionfind import UnionFind
+from adt.unionfind import UnionFind
 
 
 class TestUnionFind(unittest.TestCase):

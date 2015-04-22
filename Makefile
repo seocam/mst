@@ -7,5 +7,5 @@ install:
 
 test:
 	rm -f .coverage
-	flake8 -v .
+	flake8 -v src/ tests/
 	nosetests --with-coverage --cover-min-percentage=100
