@@ -1,9 +1,9 @@
 
 from __future__ import print_function
 
-try:
+try:  # Python 2.x
     from collections import MutableMapping
-except ImportError:
+except ImportError:  # Python 3.x
     from collections.abc import MutableMapping
 
 
@@ -29,7 +29,7 @@ class MinHeap(MutableMapping):
     def __len__(self):
         return len(self._heap)
 
-    def __str__(self):
+    def __str__(self):  # noqa
         level = 0
         i = 0
         for node in self._heap:
@@ -40,10 +40,10 @@ class MinHeap(MutableMapping):
                 i = 0
                 print()
 
-    def __iter__(self):
+    def __iter__(self):  # Python 2.x
         return self
 
-    def iter(self):
+    def iter(self):  # Python 3.x
         return self
 
     @property
