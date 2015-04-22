@@ -1,5 +1,8 @@
 
-from collections import MutableMapping
+try:
+    from collections import MutableMapping
+except ImportError:
+    from collections.abc import MutableMapping
 
 
 class MinHeap(MutableMapping):
