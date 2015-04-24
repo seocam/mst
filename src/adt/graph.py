@@ -1,5 +1,5 @@
 
-from math import sqrt
+from math import sqrt, log
 
 
 class Vertice(object):
@@ -22,10 +22,24 @@ class Edge(object):
         self.v1 = v1
         self.v2 = v2
         self.weight = v1 - v2
-        self.color = None
+        self.klass = None
+        self.mst = False
+
+    def to_graphviz(self):
+        length = log(self.weight, 2) if self.weight > 2 else 1
+        attrs = [
+            'label={}'.format(self.weight),
+            'len={}'.format(length),
+        ]
+
+        if self.mst:
+            attrs.append('color=red')
+            attrs.append('penwidth=2.0')
+
+        return '{}[{}]'.format(str(self), ','.join(attrs))
 
     def __str__(self):
-        return '"{}" -- "{}": {}'.format(self.v1, self.v2, self.weight)
+        return '"{}" -- "{}"'.format(self.v1, self.v2)
 
     def __eq__(self, other):
         return self.v1, self.v2 == other.v1, other.v2
@@ -36,6 +50,7 @@ class Graph(object):
     def __init__(self):
         self.edges = []
         self.vertices = []
+        self.vertices_index = {}
 
     def add_vertice(self, x, y):
         new_vertice = Vertice(x, y)
@@ -44,4 +59,11 @@ class Graph(object):
             edge = Edge(vertice, new_vertice)
             self.edges.append(edge)
 
+        self.vertices_index[(x, y)] = len(self.vertices)
         self.vertices.append(new_vertice)
+
+    def to_graphviz(self):
+        edges_str = []
+        for edge in self.edges:
+            edges_str.append(edge.to_graphviz())
+        return 'graph { ' + '; \n'.join(edges_str) + '; }'

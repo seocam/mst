@@ -34,7 +34,7 @@ class TestEdge(unittest.TestCase):
         self.assertEqual(self.edge.weight, 5)
 
     def test_str(self):
-        self.assertEqual('"(0, 0)" -- "(3, 4)": 5.0', str(self.edge))
+        self.assertEqual('"(0, 0)" -- "(3, 4)"', str(self.edge))
 
 
 class TestGraph(unittest.TestCase):
