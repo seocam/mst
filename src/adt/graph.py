@@ -6,6 +6,7 @@ class Vertice(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        self.edges = []
 
     def __sub__(self, other):
         return sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
@@ -16,6 +17,9 @@ class Vertice(object):
     def __str__(self):
         return '({}, {})'.format(self.x, self.y)
 
+    def __repr__(self):
+        return str(self)
+
 
 class Edge(object):
     def __init__(self, v1, v2):
@@ -24,6 +28,9 @@ class Edge(object):
         self.weight = v1 - v2
         self.klass = None
         self.mst = False
+
+    def __repr__(self):
+        return str(self)
 
     def to_graphviz(self):
         length = log(self.weight, 2) if self.weight > 2 else 1
@@ -58,12 +65,20 @@ class Graph(object):
         for vertice in self.vertices:
             edge = Edge(vertice, new_vertice)
             self.edges.append(edge)
+            new_vertice.edges.append(edge)
+            vertice.edges.append(edge)
 
-        self.vertices_index[(x, y)] = len(self.vertices)
+        self.vertices_index[new_vertice] = len(self.vertices)
         self.vertices.append(new_vertice)
+
+    def index(self, vertice):
+        return self.vertices_index[vertice]
 
     def to_graphviz(self):
         edges_str = []
         for edge in self.edges:
             edges_str.append(edge.to_graphviz())
         return 'graph { ' + '; \n'.join(edges_str) + '; }'
+
+    def __repr__(self):
+        return str(self)
