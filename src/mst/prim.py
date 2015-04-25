@@ -14,11 +14,18 @@ def prim(g):
         costs[vertice] = INFINITY
         edges[vertice] = None
 
+    mst = []
+
     for p, vertice in costs:
-        visited[vertice] = edges[vertice].mst = True
+        visited[vertice] = True
+        if edges[vertice] is not None:
+            mst.append(edges[vertice])
+            edges[vertice].mst = True
 
         for edge in vertice.edges:
             v = edge.v1 if edge.v1 != vertice else edge.v2
             if v not in visited and edge.weight < costs[v]:
                 costs[v] = edge.weight
                 edges[v] = edge
+
+    return mst
