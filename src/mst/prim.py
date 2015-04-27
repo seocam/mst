@@ -5,7 +5,7 @@ INFINITY = 2 ** 64
 
 
 def prim(g):
-    visited = {}
+    visited = set()
 
     edges = {}
     costs = MinHeap()
@@ -17,7 +17,8 @@ def prim(g):
     mst = []
 
     for p, vertice in costs:
-        visited[vertice] = True
+        visited.add(vertice)
+
         if edges[vertice] is not None:
             mst.append(edges[vertice])
             edges[vertice].mst = True
