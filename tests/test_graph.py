@@ -20,6 +20,10 @@ class TestVertice(unittest.TestCase):
         vertice = Vertice(9, 1)
         self.assertEqual('(9, 1)', str(vertice))
 
+    def test_repr(self):
+        vertice = Vertice(9, 1)
+        self.assertEqual(str(vertice), repr(vertice))
+
 
 class TestEdge(unittest.TestCase):
 
@@ -35,6 +39,9 @@ class TestEdge(unittest.TestCase):
 
     def test_str(self):
         self.assertEqual('"(0, 0)" -- "(3, 4)"', str(self.edge))
+
+    def test_repr(self):
+        self.assertEqual(str(self.edge), repr(self.edge))
 
 
 class TestGraph(unittest.TestCase):
@@ -64,3 +71,7 @@ class TestGraph(unittest.TestCase):
         edges.append(Edge(vertices[0], vertices[2]))
         self.assertEqual(self.graph.edges, edges)
         self.assertEqual(self.graph.vertices, vertices)
+
+    def test_repr(self):
+        self.graph.add_vertice(3, 4)
+        self.assertEqual(str(self.graph), repr(self.graph))

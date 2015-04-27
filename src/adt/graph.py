@@ -79,6 +79,3 @@ class Graph(object):
         for edge in self.edges:
             edges_str.append(edge.to_graphviz())
         return 'graph { ' + '; \n'.join(edges_str) + '; }'
-
-    def __repr__(self):
-        return str(self)
