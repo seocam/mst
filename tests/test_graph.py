@@ -75,3 +75,16 @@ class TestGraph(unittest.TestCase):
     def test_repr(self):
         self.graph.add_vertice(3, 4)
         self.assertEqual(str(self.graph), repr(self.graph))
+
+    def test_vertice_index(self):
+        self.graph.add_vertice(0, 0)
+        vertice = self.graph.vertices[-1]
+        self.assertEqual(self.graph.index(vertice), 0)
+
+        self.graph.add_vertice(3, 4)
+        vertice = self.graph.vertices[-1]
+        self.assertEqual(self.graph.index(vertice), 1)
+
+        self.graph.add_vertice(0, 4)
+        vertice = self.graph.vertices[-1]
+        self.assertEqual(self.graph.index(vertice), 2)
