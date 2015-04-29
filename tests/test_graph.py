@@ -3,6 +3,10 @@ import unittest
 
 from adt.graph import Graph, Vertice, Edge
 
+from nose.tools import assert_equal
+
+assert_equal.__self__.maxDiff = None
+
 
 class TestVertice(unittest.TestCase):
 
@@ -96,7 +100,7 @@ graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.32192809489];
         print(self.graph.to_graphviz())
         print('-' * 80)
 
-        self.assertEqual(self.graph.to_graphviz(), graphviz_res)
+        assert_equal(self.graph.to_graphviz(), graphviz_res)
 
     def test_vertice_index(self):
         self.graph.add_vertice(0, 0)
