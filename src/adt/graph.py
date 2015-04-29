@@ -39,7 +39,7 @@ class Edge(object):
         length = log(self.weight, 2) if self.weight > 2 else 1
         attrs = [
             'label={}'.format(self.weight),
-            'len={}'.format(length),
+            'len={0:.4f}'.format(length),
         ]
 
         if self.mst:

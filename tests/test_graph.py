@@ -87,12 +87,12 @@ class TestGraph(unittest.TestCase):
         self.graph.edges[-1].mst = True
         self.graph.add_vertice(3, 0)
         graphviz_res = """
-graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.32192809489];
-"(0, 0)" -- "(0, 4)"[label=4.0,len=2.0];
-"(3, 4)" -- "(0, 4)"[label=3.0,len=1.58496250072,color=red,penwidth=2.0];
-"(0, 0)" -- "(3, 0)"[label=3.0,len=1.58496250072];
-"(3, 4)" -- "(3, 0)"[label=4.0,len=2.0];
-"(0, 4)" -- "(3, 0)"[label=5.0,len=2.32192809489]; }""".strip()
+graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.3219];
+"(0, 0)" -- "(0, 4)"[label=4.0,len=2.0000];
+"(3, 4)" -- "(0, 4)"[label=3.0,len=1.5850,color=red,penwidth=2.0];
+"(0, 0)" -- "(3, 0)"[label=3.0,len=1.5850];
+"(3, 4)" -- "(3, 0)"[label=4.0,len=2.0000];
+"(0, 4)" -- "(3, 0)"[label=5.0,len=2.3219]; }""".strip()
 
         print('-' * 80)
         print(graphviz_res)
