@@ -76,6 +76,28 @@ class TestGraph(unittest.TestCase):
         self.graph.add_vertice(3, 4)
         self.assertEqual(str(self.graph), repr(self.graph))
 
+    def test_graphviz(self):
+        self.graph.add_vertice(0, 0)
+        self.graph.add_vertice(3, 4)
+        self.graph.add_vertice(0, 4)
+        self.graph.edges[-1].mst = True
+        self.graph.add_vertice(3, 0)
+        graphviz_res = """
+graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.32192809489];
+"(0, 0)" -- "(0, 4)"[label=4.0,len=2.0];
+"(3, 4)" -- "(0, 4)"[label=3.0,len=1.58496250072,color=red,penwidth=2.0];
+"(0, 0)" -- "(3, 0)"[label=3.0,len=1.58496250072];
+"(3, 4)" -- "(3, 0)"[label=4.0,len=2.0];
+"(0, 4)" -- "(3, 0)"[label=5.0,len=2.32192809489]; }""".strip()
+
+        print('-' * 80)
+        print(graphviz_res)
+        print('-' * 80)
+        print(self.graph.to_graphviz())
+        print('-' * 80)
+
+        self.assertEqual(self.graph.to_graphviz(), graphviz_res)
+
     def test_vertice_index(self):
         self.graph.add_vertice(0, 0)
         vertice = self.graph.vertices[-1]
