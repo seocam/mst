@@ -1,5 +1,5 @@
 
-from adt.unionfind import UnionFind
+from adt import UnionFind
 
 
 def kruskal(g):

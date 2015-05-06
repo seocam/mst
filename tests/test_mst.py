@@ -2,7 +2,7 @@
 import unittest
 
 from adt.graph import Graph, Vertice, Edge
-from mst import kruskal, prim
+from mst import kruskal, prim, split_in_groups
 
 
 class TestMinimumSpanningTree(unittest.TestCase):
@@ -29,3 +29,20 @@ class TestMinimumSpanningTree(unittest.TestCase):
     def test_prim(self):
         mst = prim(self.g)
         self.assertEqual(sorted(mst), sorted(self.mst))
+
+    def test_grouping(self):
+        groups = split_in_groups(self.mst)
+        self.assertEqual(len(groups), 2)
+        self.assertIn(Vertice(10, 40), groups[0])
+        self.assertIn(Vertice(0, 0), groups[1])
+        self.assertIn(Vertice(3, 4), groups[1])
+        self.assertIn(Vertice(0, 4), groups[1])
+        self.assertIn(Vertice(3, 0), groups[1])
+
+        groups = split_in_groups(self.mst, 3)
+        self.assertEqual(len(groups), 3)
+        self.assertIn(Vertice(10, 40), groups[0])
+        self.assertIn(Vertice(0, 0), groups[1])
+        self.assertIn(Vertice(3, 0), groups[1])
+        self.assertIn(Vertice(3, 4), groups[2])
+        self.assertIn(Vertice(0, 4), groups[2])

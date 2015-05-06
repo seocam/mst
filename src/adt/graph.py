@@ -12,7 +12,7 @@ class Vertice(object):
         return sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
 
     def __eq__(self, other):
-        return self.x, self.y == other.x, other.y
+        return self.x == other.x and self.y == other.y
 
     def __hash__(self):
         return hash((self.x, self.y))
@@ -29,7 +29,6 @@ class Edge(object):
         self.v1 = v1
         self.v2 = v2
         self.weight = v1 - v2
-        self.klass = None
         self.mst = False
 
     def __repr__(self):
