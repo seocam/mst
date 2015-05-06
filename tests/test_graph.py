@@ -71,8 +71,8 @@ class TestGraph(unittest.TestCase):
 
         self.graph.add_vertice(0, 4)
         vertices.append(Vertice(0, 4))
-        edges.append(Edge(vertices[0], vertices[1]))
         edges.append(Edge(vertices[0], vertices[2]))
+        edges.append(Edge(vertices[1], vertices[2]))
         self.assertEqual(self.graph.edges, edges)
         self.assertEqual(self.graph.vertices, vertices)
 
