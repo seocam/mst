@@ -33,6 +33,7 @@ class TestMinimumSpanningTree(unittest.TestCase):
     def test_grouping(self):
         groups = split_in_groups(self.mst)
         self.assertEqual(len(groups), 2)
+        groups.sort(key=lambda x: len(x))
         self.assertIn(Vertice(10, 40), groups[0])
         self.assertIn(Vertice(0, 0), groups[1])
         self.assertIn(Vertice(3, 4), groups[1])
@@ -41,6 +42,7 @@ class TestMinimumSpanningTree(unittest.TestCase):
 
         groups = split_in_groups(self.mst, 3)
         self.assertEqual(len(groups), 3)
+        groups.sort(key=lambda x: len(x))
         self.assertIn(Vertice(10, 40), groups[0])
         self.assertIn(Vertice(0, 0), groups[1])
         self.assertIn(Vertice(3, 0), groups[1])
@@ -52,4 +54,5 @@ class TestMinimumSpanningTree(unittest.TestCase):
             super(TestMinimumSpanningTree, self).assertCountEqual(first,
                                                                   second, msg)
         except AttributeError:
-            self.assertEqual(sorted(first), sorted(second))
+            key = lambda edge: (edge.v1.x, edge.v1.y, edge.v2.x, edge.v2.y)
+            self.assertEqual(sorted(first, key=key), sorted(second, key=key))
