@@ -43,8 +43,8 @@ class MinHeap(MutableMapping):
     def __iter__(self):  # Python 2.x
         return self
 
-    def iter(self):  # Python 3.x
-        return self
+    def __next__(self):  # Python 3.x
+        return self.next()
 
     @property
     def last_index(self):

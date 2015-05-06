@@ -51,7 +51,7 @@ class Edge(object):
         return '"{}" -- "{}"'.format(self.v1, self.v2)
 
     def __eq__(self, other):
-        return self.v1, self.v2 == other.v1, other.v2
+        return self.v1 == other.v1 and self.v2 == other.v2
 
 
 class Graph(object):
