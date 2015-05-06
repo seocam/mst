@@ -24,11 +24,11 @@ class TestMinimumSpanningTree(unittest.TestCase):
 
     def test_kruskal(self):
         mst = kruskal(self.g)
-        self.assertEqual(sorted(mst), sorted(self.mst))
+        self.assertCountEqual(mst, self.mst)
 
     def test_prim(self):
         mst = prim(self.g)
-        self.assertEqual(sorted(mst), sorted(self.mst))
+        self.assertCountEqual(mst, self.mst)
 
     def test_grouping(self):
         groups = split_in_groups(self.mst)
@@ -46,3 +46,10 @@ class TestMinimumSpanningTree(unittest.TestCase):
         self.assertIn(Vertice(3, 0), groups[1])
         self.assertIn(Vertice(3, 4), groups[2])
         self.assertIn(Vertice(0, 4), groups[2])
+
+    def assertCountEqual(self, first, second, msg=None):
+        try:
+            super(TestMinimumSpanningTree, self).assertCountEqual(first,
+                                                                  second, msg)
+        except AttributeError:
+            self.assertEqual(sorted(first), sorted(second))

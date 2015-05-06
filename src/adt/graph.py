@@ -51,6 +51,8 @@ class Edge(object):
         return '"{}" -- "{}"'.format(self.v1, self.v2)
 
     def __eq__(self, other):
+        if not isinstance(other, Edge):  # Python 3
+            return False
         return self.v1 == other.v1 and self.v2 == other.v2
 
 
