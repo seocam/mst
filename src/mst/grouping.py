@@ -22,4 +22,4 @@ def split_in_groups(edges, n=2):
 
         groups[group_id].append(vertice)
 
-    return groups.values()
+    return list(groups.values())
