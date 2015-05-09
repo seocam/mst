@@ -1,9 +1,25 @@
 
-class UnionFind(object):
+from .graph import Graph
 
-    def __init__(self, lenght):
-        self._component_id = list(range(lenght))
-        self._component_size = [1] * lenght
+
+class UnionFind(Graph):
+
+    def __init__(self):
+        self._component_id = []
+        self._component_size = []
+        super(UnionFind, self).__init__()
+
+    def add_vertice(self, x, y):
+        self._component_id.append(len(self.vertices))
+        self._component_size.append(1)
+        super(UnionFind, self).add_vertice(x, y)
+
+    @classmethod
+    def from_graph(cls, graph):
+        unionfind = cls()
+        for vertice in graph.vertices:
+            unionfind.add_vertice(vertice.x, vertice.y)
+        return unionfind
 
     def union(self, p, q):
         pid = self.find(p)
@@ -23,10 +39,12 @@ class UnionFind(object):
             self._component_size[qid] = size_p + size_q
 
     def find(self, p):
-        while p != self._component_id[p]:
-            self._component_id[p] = self._component_id[self._component_id[p]]
-            p = self._component_id[p]
-        return p
+        i = self.index(p)
+
+        while i != self._component_id[i]:
+            self._component_id[i] = self._component_id[self._component_id[i]]
+            i = self._component_id[i]
+        return i
 
     def connected(self, p, q):
         return self.find(p) == self.find(q)

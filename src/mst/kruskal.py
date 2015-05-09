@@ -5,16 +5,13 @@ from adt import UnionFind
 def kruskal(g):
     edges = sorted(g.edges, key=lambda x: x.weight)
 
-    components = UnionFind(len(g.vertices))
+    components = UnionFind.from_graph(g)
 
     mst = []
 
     for edge in edges:
-        v1_index = g.index(edge.v1)
-        v2_index = g.index(edge.v2)
-
-        if not components.connected(v1_index, v2_index):
-            components.union(v1_index, v2_index)
+        if not components.connected(edge.v1, edge.v2):
+            components.union(edge.v1, edge.v2)
             edge.mst = True
             mst.append(edge)
 
