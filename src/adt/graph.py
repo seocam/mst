@@ -65,15 +65,22 @@ class Graph(object):
 
     def add_vertice(self, x, y):
         new_vertice = Vertice(x, y)
-
-        for vertice in self.vertices:
-            edge = Edge(vertice, new_vertice)
-            self.edges.append(edge)
-            new_vertice.edges.append(edge)
-            vertice.edges.append(edge)
-
         self.vertices_index[new_vertice] = len(self.vertices)
         self.vertices.append(new_vertice)
+        return new_vertice
+
+    def add_edge(self, v1, v2):
+        new_edge = Edge(v1, v2)
+        self.edges.append(new_edge)
+        v1.edges.append(new_edge)
+        v2.edges.append(new_edge)
+        return new_edge
+
+    def add_connected_vertice(self, x, y):
+        new_vertice = self.add_vertice(x, y)
+
+        for vertice in self.vertices[:-1]:
+            self.add_edge(vertice, new_vertice)
 
     def index(self, vertice):
         return self.vertices_index[vertice]

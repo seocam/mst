@@ -9,11 +9,11 @@ class TestMinimumSpanningTree(unittest.TestCase):
 
     def setUp(self):
         self.g = Graph()
-        self.g.add_vertice(0, 0)
-        self.g.add_vertice(3, 4)
-        self.g.add_vertice(0, 4)
-        self.g.add_vertice(3, 0)
-        self.g.add_vertice(10, 40)
+        self.g.add_connected_vertice(0, 0)
+        self.g.add_connected_vertice(3, 4)
+        self.g.add_connected_vertice(0, 4)
+        self.g.add_connected_vertice(3, 0)
+        self.g.add_connected_vertice(10, 40)
 
         self.mst = [
             Edge(Vertice(0, 0), Vertice(0, 4)),

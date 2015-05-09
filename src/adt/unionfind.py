@@ -1,5 +1,5 @@
 
-class UnionFind(list):
+class UnionFind(object):
 
     def __init__(self, lenght):
         self._component_id = list(range(lenght))

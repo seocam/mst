@@ -53,23 +53,23 @@ class TestGraph(unittest.TestCase):
     def setUp(self):
         self.graph = Graph()
 
-    def test_add_vertice(self):
+    def test_add_connected_vertice(self):
         vertices = []
         edges = []
         self.assertEqual(self.graph.edges, edges)
         self.assertEqual(self.graph.vertices, vertices)
 
-        self.graph.add_vertice(0, 0)
+        self.graph.add_connected_vertice(0, 0)
         vertices.append(Vertice(0, 0))
         self.assertEqual(self.graph.edges, edges)
         self.assertEqual(self.graph.vertices, vertices)
 
-        self.graph.add_vertice(3, 4)
+        self.graph.add_connected_vertice(3, 4)
         vertices.append(Vertice(3, 4))
         edges.append(Edge(vertices[0], vertices[1]))
         self.assertEqual(self.graph.edges, edges)
 
-        self.graph.add_vertice(0, 4)
+        self.graph.add_connected_vertice(0, 4)
         vertices.append(Vertice(0, 4))
         edges.append(Edge(vertices[0], vertices[2]))
         edges.append(Edge(vertices[1], vertices[2]))
@@ -77,15 +77,15 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(self.graph.vertices, vertices)
 
     def test_repr(self):
-        self.graph.add_vertice(3, 4)
+        self.graph.add_connected_vertice(3, 4)
         self.assertEqual(str(self.graph), repr(self.graph))
 
     def test_graphviz(self):
-        self.graph.add_vertice(0, 0)
-        self.graph.add_vertice(3, 4)
-        self.graph.add_vertice(0, 4)
+        self.graph.add_connected_vertice(0, 0)
+        self.graph.add_connected_vertice(3, 4)
+        self.graph.add_connected_vertice(0, 4)
         self.graph.edges[-1].mst = True
-        self.graph.add_vertice(3, 0)
+        self.graph.add_connected_vertice(3, 0)
         graphviz_res = """
 graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.3219];
 "(0, 0)" -- "(0, 4)"[label=4.0,len=2.0000];
@@ -103,14 +103,14 @@ graph { "(0, 0)" -- "(3, 4)"[label=5.0,len=2.3219];
         assert_equal(self.graph.to_graphviz(), graphviz_res)
 
     def test_vertice_index(self):
-        self.graph.add_vertice(0, 0)
+        self.graph.add_connected_vertice(0, 0)
         vertice = self.graph.vertices[-1]
         self.assertEqual(self.graph.index(vertice), 0)
 
-        self.graph.add_vertice(3, 4)
+        self.graph.add_connected_vertice(3, 4)
         vertice = self.graph.vertices[-1]
         self.assertEqual(self.graph.index(vertice), 1)
 
-        self.graph.add_vertice(0, 4)
+        self.graph.add_connected_vertice(0, 4)
         vertice = self.graph.vertices[-1]
         self.assertEqual(self.graph.index(vertice), 2)
