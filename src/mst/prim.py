@@ -1,5 +1,5 @@
 
-from adt import MinHeap
+from adt import MinHeap, Graph
 
 INFINITY = 2 ** 64
 
@@ -14,13 +14,13 @@ def prim(g):
         costs[vertice] = INFINITY
         edges[vertice] = None
 
-    mst = []
+    mst = Graph()
 
     for p, vertice in costs:
         visited.add(vertice)
 
         if edges[vertice] is not None:
-            mst.append(edges[vertice])
+            mst.add_edge(edge=edges[vertice])
             edges[vertice].mst = True
 
         for edge in vertice.edges:

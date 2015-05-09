@@ -55,6 +55,9 @@ class Edge(object):
             return False
         return self.v1 == other.v1 and self.v2 == other.v2
 
+    def __hash__(self):
+        return hash((self.v1, self.v2))
+
 
 class Graph(object):
 
@@ -63,14 +66,39 @@ class Graph(object):
         self.vertices = []
         self.vertices_index = {}
 
-    def add_vertice(self, x, y):
-        new_vertice = Vertice(x, y)
+    def add_vertice(self, x=None, y=None, vertice=None):
+        assert ((x is not None and y is not None)
+                or isinstance(vertice, Vertice)), ("x and y (or vertice) must "
+                                                   "be provided")
+        if vertice:
+            new_vertice = vertice
+        else:
+            new_vertice = Vertice(x, y)
+
+        if self.index(new_vertice) is not None:
+            return new_vertice
+
         self.vertices_index[new_vertice] = len(self.vertices)
         self.vertices.append(new_vertice)
+
         return new_vertice
 
-    def add_edge(self, v1, v2):
-        new_edge = Edge(v1, v2)
+    def add_edge(self, v1=None, v2=None, edge=None):
+        assert ((v1 is not None and v2 is not None)
+                or isinstance(edge, Edge)), ("v1 and v2 (or edge) "
+                                             "must be provided")
+
+        if edge:
+            new_edge = edge
+            v1 = edge.v1
+            v2 = edge.v2
+        else:
+            new_edge = Edge(v1, v2)
+
+        for v in (v1, v2):
+            if not self.index(v):
+                self.add_vertice(vertice=v)
+
         self.edges.append(new_edge)
         v1.edges.append(new_edge)
         v2.edges.append(new_edge)
@@ -83,7 +111,7 @@ class Graph(object):
             self.add_edge(vertice, new_vertice)
 
     def index(self, vertice):
-        return self.vertices_index[vertice]
+        return self.vertices_index.get(vertice)
 
     def to_graphviz(self):
         edges_str = []

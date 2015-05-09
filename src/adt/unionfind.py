@@ -9,10 +9,10 @@ class UnionFind(Graph):
         self._component_size = []
         super(UnionFind, self).__init__()
 
-    def add_vertice(self, x, y):
-        self._component_id.append(len(self.vertices))
+    def add_vertice(self, x=None, y=None, vertice=None):
+        super(UnionFind, self).add_vertice(x, y, vertice)
+        self._component_id.append(len(self.vertices)-1)
         self._component_size.append(1)
-        super(UnionFind, self).add_vertice(x, y)
 
     @classmethod
     def from_graph(cls, graph):
