@@ -38,6 +38,8 @@ class UnionFind(Graph):
             self._component_id[pid] = qid
             self._component_size[qid] = size_p + size_q
 
+        self.add_edge(p, q)
+
     def find(self, p):
         i = self.index(p)
 
@@ -48,3 +50,14 @@ class UnionFind(Graph):
 
     def connected(self, p, q):
         return self.find(p) == self.find(q)
+
+    def groups(self):
+        groups = {}
+        for vertice in self.vertices:
+            group_id = self.find(vertice)
+
+            if group_id not in groups:
+                groups[group_id] = []
+
+            groups[group_id].append(vertice)
+        return list(groups.values())
