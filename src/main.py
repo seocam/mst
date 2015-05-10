@@ -88,7 +88,7 @@ def print_groups(data, groups):
 
 def compare_groups(data, groups, reference_filename):
     reference_groups = {}
-    with file(reference_filename) as reference_file:
+    with open(reference_filename) as reference_file:
         for i, line in enumerate(reference_file):
             group = int(line.strip())
             reference_groups[data[i]] = group
