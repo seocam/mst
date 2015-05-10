@@ -55,9 +55,6 @@ class Edge(object):
             return False
         return self.v1 == other.v1 and self.v2 == other.v2
 
-    def __hash__(self):
-        return hash((self.v1, self.v2))
-
 
 class Graph(object):
 
