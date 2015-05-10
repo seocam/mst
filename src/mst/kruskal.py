@@ -14,7 +14,7 @@ def kruskal(g, groups=1):
             edge.mst = True
             group_count -= 1
 
-        if group_count == groups:
+        if groups > 1 and group_count == groups:
             break
 
     return components.groups()
