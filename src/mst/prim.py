@@ -1,7 +1,7 @@
 
 from adt import MinHeap, Graph, UnionFind
 
-INFINITY = 2 ** 64
+INFINITY = float('Inf')
 
 
 def remove_heaviest_edges(graph, n):
