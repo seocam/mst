@@ -1,7 +1,7 @@
 
 import unittest
 
-from adt.graph import Graph, Vertice, Edge
+from adt.graph import Graph, Vertice
 from mst import kruskal, prim, split_in_groups
 
 

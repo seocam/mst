@@ -1,10 +1,23 @@
 
-from adt import MinHeap, Graph
+from adt import MinHeap, Graph, UnionFind
 
 INFINITY = 2 ** 64
 
 
-def prim(g):
+def remove_heaviest_edges(graph, n):
+    components = UnionFind.from_graph(graph)
+
+    edges = sorted(graph.edges, key=lambda x: x.weight)
+    if n:
+        edges = edges[:-n]
+
+    for edge in edges:
+        components.union(edge.v1, edge.v2)
+
+    return components.groups()
+
+
+def prim(g, groups=1):
     visited = set()
 
     edges = {}
@@ -29,4 +42,4 @@ def prim(g):
                 costs[v] = edge.weight
                 edges[v] = edge
 
-    return mst
+    return remove_heaviest_edges(mst, groups-1)
