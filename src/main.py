@@ -1,4 +1,6 @@
 
+from __future__ import print_function
+
 import sys
 import itertools
 
@@ -105,7 +107,8 @@ def compare_groups(data, groups, reference_filename):
         else:
             disagreement += 1
 
-    print('Rand Index: {}'.format(aggreements/float(aggreements+disagreement)))
+    rand_index = (aggreements/float(aggreements + disagreement))
+    print('Rand Index: {}'.format(rand_index), file=sys.stderr)
 
 
 def main():
